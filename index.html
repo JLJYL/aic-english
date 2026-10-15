@@ -305,122 +305,151 @@
   <!-- JAVASCRIPT LOGIC -->
   <script>
     // -------------------------------------------------------------
-    // 1. 100 實用英文單字與片語資料庫 (JSON Array)
+    // 1. 多元豐富 100 實用英文單字、片語與高階成語資料庫 (JSON Array)
     // -------------------------------------------------------------
     const vocabList = [
-      { id: 1, word: "abandon", phonetic: "/əˈbændən/", translation: "放棄；拋棄", type: "word" },
-      { id: 2, word: "ability", phonetic: "/əˈbɪləti/", translation: "能力；才幹", type: "word" },
-      { id: 3, word: "absolute", phonetic: "/ˈæbsəluːt/", translation: "絕對的；完全的", type: "word" },
-      { id: 4, word: "abundant", phonetic: "/əˈbʌndənt/", translation: "豐富的；充裕的", type: "word" },
-      { id: 5, word: "academic", phonetic: "/ˌækəˈdemɪk/", translation: "學術的；學院的", type: "word" },
-      { id: 6, word: "accept", phonetic: "/əkˈsept/", translation: "接受；同意", type: "word" },
-      { id: 7, word: "accident", phonetic: "/ˈæksɪdənt/", translation: "意外事故", type: "word" },
-      { id: 8, word: "accompany", phonetic: "/əˈkʌmpəni/", translation: "陪伴；伴隨", type: "word" },
-      { id: 9, word: "accomplish", phonetic: "/əˈkʌmplɪʃ/", translation: "完成；實現", type: "word" },
-      { id: 10, word: "accurate", phonetic: "/ˈækjərət/", translation: "準確的；精確的", type: "word" },
-      { id: 11, word: "achieve", phonetic: "/əˈtʃiːv/", translation: "達到；取得", type: "word" },
-      { id: 12, word: "acknowledge", phonetic: "/əkˈnɒlɪdʒ/", translation: "承認；感謝", type: "word" },
-      { id: 13, word: "acquire", phonetic: "/əˈkwaɪər/", translation: "獲得；學到", type: "word" },
-      { id: 14, word: "adapt", phonetic: "/əˈdæpt/", translation: "適應；改編", type: "word" },
-      { id: 15, word: "adequate", phonetic: "/ˈædɪkwət/", translation: "足夠的；適當的", type: "word" },
-      { id: 16, word: "adjust", phonetic: "/əˈdʒʌst/", translation: "調整；適應", type: "word" },
-      { id: 17, word: "admire", phonetic: "/ədˈmaɪər/", translation: "欽佩；贊賞", type: "word" },
-      { id: 18, word: "advantage", phonetic: "/ədˈvɑːntɪdʒ/", translation: "優勢；好處", type: "word" },
-      { id: 19, word: "advocate", phonetic: "/ˈædvəkət/", translation: "提倡；主張", type: "word" },
-      { id: 20, word: "analyze", phonetic: "/ˈænəlaɪz/", translation: "分析；解析", type: "word" },
-      { id: 21, word: "apologize", phonetic: "/əˈpɒlədʒaɪz/", translation: "道歉；致歉", type: "word" },
-      { id: 22, word: "apparent", phonetic: "/əˈpærənt/", translation: "顯而易見的", type: "word" },
-      { id: 23, word: "appreciate", phonetic: "/əˈpriːʃieɪt/", translation: "欣賞；感激", type: "word" },
-      { id: 24, word: "approach", phonetic: "/əˈprəʊtʃ/", translation: "接近；方法", type: "word" },
-      { id: 25, word: "artificial", phonetic: "/ˌɑːtɪˈfɪʃl/", translation: "人造的；人工的", type: "word" },
-      { id: 26, word: "attitude", phonetic: "/ˈætɪtjuːd/", translation: "態度；看法", type: "word" },
-      { id: 27, word: "attractive", phonetic: "/əˈtræktɪv/", translation: "吸引人的；迷人的", type: "word" },
-      { id: 28, word: "available", phonetic: "/əˈveɪləbl/", translation: "可獲得的；有空的", type: "word" },
-      { id: 29, word: "awareness", phonetic: "/əˈweənəs/", translation: "意識；察覺", type: "word" },
-      { id: 30, word: "background", phonetic: "/ˈbækɡraʊnd/", translation: "背景；經歷", type: "word" },
-      { id: 31, word: "balance", phonetic: "/ˈbæləns/", translation: "平衡；均衡", type: "word" },
-      { id: 32, word: "barrier", phonetic: "/ˈbæriər/", translation: "障礙；屏障", type: "word" },
-      { id: 33, word: "benefit", phonetic: "/ˈbenɪfɪt/", translation: "好處；利益", type: "word" },
-      { id: 34, word: "boundary", phonetic: "/ˈbaʊndri/", translation: "邊界；界線", type: "word" },
-      { id: 35, word: "brief", phonetic: "/briːf/", translation: "簡短的；扼要的", type: "word" },
-      { id: 36, word: "brilliant", phonetic: "/ˈbrɪliənt/", translation: "傑出的；璀璨的", type: "word" },
-      { id: 37, word: "candidate", phonetic: "/ˈkændɪdət/", translation: "候選人；應徵者", type: "word" },
-      { id: 38, word: "capacity", phonetic: "/kəˈpæsəti/", translation: "容量；能力", type: "word" },
-      { id: 39, word: "challenge", phonetic: "/ˈtʃælɪndʒ/", translation: "挑戰；質疑", type: "word" },
-      { id: 40, word: "character", phonetic: "/ˈkærəktər/", translation: "性格；角色", type: "word" },
-      { id: 41, word: "clarify", phonetic: "/ˈklærəfaɪ/", translation: "澄清；闡明", type: "word" },
-      { id: 42, word: "cognitive", phonetic: "/ˈkɒɡnətɪv/", translation: "認知的；感知的", type: "word" },
-      { id: 43, word: "collaborate", phonetic: "/kəˈlæbəreɪt/", translation: "合作；協作", type: "word" },
-      { id: 44, word: "commitment", phonetic: "/kəˈmɪtmənt/", translation: "承諾；奉獻", type: "word" },
-      { id: 45, word: "community", phonetic: "/kəˈmjuːnəti/", translation: "社區；共同體", type: "word" },
-      { id: 46, word: "compete", phonetic: "/kəmˈpiːt/", translation: "競爭；比賽", type: "word" },
-      { id: 47, word: "complicated", phonetic: "/ˈkɒmplɪkeɪtɪd/", translation: "複雜的", type: "word" },
-      { id: 48, word: "concentrate", phonetic: "/ˈkɒnsntreɪt/", translation: "專心；集中", type: "word" },
-      { id: 49, word: "concept", phonetic: "/ˈkɒnsept/", translation: "概念；觀念", type: "word" },
-      { id: 50, word: "confidence", phonetic: "/ˈkɒnfɪdəns/", translation: "信心；自信", type: "word" },
-      { id: 51, word: "consequence", phonetic: "/ˈkɒnsɪkwəns/", translation: "結果；後果", type: "word" },
-      { id: 52, word: "considerable", phonetic: "/kənˈsɪdərəbl/", translation: "相當大的；重要的", type: "word" },
-      { id: 53, word: "constant", phonetic: "/ˈkɒnstənt/", translation: "持續的；恆定的", type: "word" },
-      { id: 54, word: "contribution", phonetic: "/ˌkɒntrɪˈbjuːʃn/", translation: "貢獻；捐助", type: "word" },
-      { id: 55, word: "convenient", phonetic: "/kənˈviːniənt/", translation: "方便的；便利的", type: "word" },
-      { id: 56, word: "critical", phonetic: "/ˈkrɪtɪkl/", translation: "批判的；關鍵的", type: "word" },
-      { id: 57, word: "curious", phonetic: "/ˈkjʊəriəs/", translation: "好奇的", type: "word" },
-      { id: 58, word: "decision", phonetic: "/dɪˈsɪʒn/", translation: "決定；決斷", type: "word" },
-      { id: 59, word: "definitely", phonetic: "/ˈdefɪnətli/", translation: "明確地；肯定地", type: "word" },
-      { id: 60, word: "demonstrate", phonetic: "/ˈdemənstreɪt/", translation: "示範；證明", type: "word" },
-      { id: 61, word: "determine", phonetic: "/dɪˈtɜːmɪn/", translation: "決定；確定", type: "word" },
-      { id: 62, word: "development", phonetic: "/dɪˈveləpmənt/", translation: "發展；開發", type: "word" },
-      { id: 63, word: "efficient", phonetic: "/ɪˈfɪʃnt/", translation: "高效率的", type: "word" },
-      { id: 64, word: "encourage", phonetic: "/ɪnˈkʌrɪdʒ/", translation: "鼓勵；促進", type: "word" },
-      { id: 65, word: "essential", phonetic: "/ɪˈsenʃl/", translation: "必要的；不可或缺的", type: "word" },
-      { id: 66, word: "flexibility", phonetic: "/ˌfleksəˈbɪləti/", translation: "靈活性；彈性", type: "word" },
-      { id: 67, word: "fundamental", phonetic: "/ˌfʌndəˈmentl/", translation: "基礎的；根本的", type: "word" },
-      { id: 68, word: "guarantee", phonetic: "/ˌɡærənˈtiː/", translation: "保證；擔保", type: "word" },
-      { id: 69, word: "hesitate", phonetic: "/ˈhezɪteɪt/", translation: "猶豫；躊躇", type: "word" },
-      { id: 70, word: "identify", phonetic: "/aɪˈdentɪfaɪ/", translation: "識別；確認", type: "word" },
-      { id: 71, word: "innovation", phonetic: "/ˌɪnəˈveɪʃn/", translation: "創新；革新", type: "word" },
-      { id: 72, word: "opportunity", phonetic: "/ˌɒpəˈtjuːnəti/", translation: "機會；時機", type: "word" },
-      { id: 73, word: "perspective", phonetic: "/pəˈspektɪv/", translation: "觀點；遠景", type: "word" },
-      { id: 74, word: "strategy", phonetic: "/ˈstrætədʒi/", translation: "策略；戰略", type: "word" },
+      // 基礎與日常 (Everyday)
+      { id: 1, word: "resilient", phonetic: "/rɪˈzɪliənt/", translation: "有彈性的；能迅速恢復的", type: "word" },
+      { id: 2, word: "empathy", phonetic: "/ˈempəθi/", translation: "同理心；共鳴", type: "word" },
+      { id: 3, word: "spontaneous", phonetic: "/spɒnˈteɪniəs/", translation: "自發的；率真的", type: "word" },
+      { id: 4, word: "versatile", phonetic: "/ˈvɜːsətaɪl/", translation: "多才多藝的；多功能的", type: "word" },
+      { id: 5, word: "meticulous", phonetic: "/mɪˈtɪkjələs/", translation: "嚴謹的；絲毫不苟的", type: "word" },
+      { id: 6, word: "nostalgia", phonetic: "/nɒˈstældʒə/", translation: "懷舊；鄉愁", type: "word" },
+      { id: 7, word: "pragmatic", phonetic: "/præɡˈmætɪk/", translation: "務實的；重實效的", type: "word" },
+      { id: 8, word: "skeptical", phonetic: "/ˈskeptɪkl/", translation: "懷疑的；抱持疑問的", type: "word" },
+      { id: 9, word: "ambiguous", phonetic: "/æmˈbɪɡjuəs/", translation: "模稜兩可的；含糊的", type: "word" },
+      { id: 10, word: "aesthetic", phonetic: "/iːsˈθetɪk/", translation: "美感的；審美的", type: "word" },
 
-      // 片語 (Phrases) 75 - 100
-      { id: 75, word: "give up", phonetic: "/ɡɪv ʌp/", translation: "放棄", type: "phrase" },
-      { id: 76, word: "take place", phonetic: "/teɪk pleɪs/", translation: "發生；舉行", type: "phrase" },
-      { id: 77, word: "carry out", phonetic: "/ˈkæri aʊt/", translation: "執行；實施", type: "phrase" },
-      { id: 78, word: "figure out", phonetic: "/ˈfɪɡər aʊt/", translation: "理解；想出", type: "phrase" },
-      { id: 79, word: "look forward to", phonetic: "/lʊk ˈfɔːwəd tuː/", translation: "期待；盼望", type: "phrase" },
-      { id: 80, word: "pay attention to", phonetic: "/peɪ əˈtenʃn tuː/", translation: "注意；留心", type: "phrase" },
-      { id: 81, word: "run out of", phonetic: "/rʌn aʊt əv/", translation: "用完；耗盡", type: "phrase" },
-      { id: 82, word: "turn out to be", phonetic: "/tɜːn aʊt tuː biː/", translation: "結果是；證明為", type: "phrase" },
-      { id: 83, word: "take advantage of", phonetic: "/teɪk ədˈvɑːntɪdʒ əv/", translation: "利用；占…便宜", type: "phrase" },
-      { id: 84, word: "make a difference", phonetic: "/meɪk ə ˈdɪfrəns/", translation: "產生影響；起作用", type: "phrase" },
-      { id: 85, word: "in terms of", phonetic: "/ɪn tɜːmz əv/", translation: "就…而言；在…方面", type: "phrase" },
-      { id: 86, word: "as long as", phonetic: "/æz lɒŋ æz/", translation: "只要", type: "phrase" },
-      { id: 87, word: "come up with", phonetic: "/kʌm ʌp wɪð/", translation: "想出；提出", type: "phrase" },
-      { id: 88, word: "keep in mind", phonetic: "/kiːp ɪn maɪnd/", translation: "記住；牢記", type: "phrase" },
-      { id: 89, word: "point of view", phonetic: "/pɔɪnt əv vjuː/", translation: "觀點；看法", type: "phrase" },
-      { id: 90, word: "stand for", phonetic: "/stænd fɔːr/", translation: "代表；象徵", type: "phrase" },
-      { id: 91, word: "break down", phonetic: "/breɪk daʊn/", translation: "故障；崩潰", type: "phrase" },
-      { id: 92, word: "call off", phonetic: "/kɔːl ɒf/", translation: "取消", type: "phrase" },
-      { id: 93, word: "catch up with", phonetic: "/kætʃ ʌp wɪð/", translation: "趕上；追上", type: "phrase" },
-      { id: 94, word: "get along with", phonetic: "/ɡet əˈlɒŋ wɪð/", translation: "與…相處融洽", type: "phrase" },
-      { id: 95, word: "keep up with", phonetic: "/kiːp ʌp wɪð/", translation: "跟上；保持步調", type: "phrase" },
-      { id: 96, word: "put off", phonetic: "/pʊt ɒf/", translation: "延期；推遲", type: "phrase" },
-      { id: 97, word: "result in", phonetic: "/rɪˈzʌlt ɪn/", translation: "導致；引起", type: "phrase" },
-      { id: 98, word: "take part in", phonetic: "/teɪk pɑːt ɪn/", translation: "參加；參與", type: "phrase" },
-      { id: 99, word: "sooner or later", phonetic: "/ˈsuːnər ɔː ˈleɪtər/", translation: "遲早", type: "phrase" },
-      { id: 100, word: "ups and downs", phonetic: "/ʌps ænd daʊns/", translation: "高低起伏；盛衰", type: "phrase" }
+      // 職場與商務 (Business & Tech)
+      { id: 11, word: "synergy", phonetic: "/ˈsɪnədʒi/", translation: "協同效應；綜效", type: "word" },
+      { id: 12, word: "benchmark", phonetic: "/ˈbentʃmɑːk/", translation: "基準；標竿", type: "word" },
+      { id: 13, word: "feasibility", phonetic: "/ˌfiːzəˈbɪləti/", translation: "可行性", type: "word" },
+      { id: 14, word: "incentive", phonetic: "/ɪnˈsentɪv/", translation: "獎勵；動機", type: "word" },
+      { id: 15, word: "leverage", phonetic: "/ˈliːvərɪdʒ/", translation: "槓桿作用；利用", type: "word" },
+      { id: 16, word: "scalability", phonetic: "/ˌskeɪləˈbɪləti/", translation: "可擴充性", type: "word" },
+      { id: 17, word: "pivot", phonetic: "/ˈpɪvət/", translation: "轉向；樞紐", type: "word" },
+      { id: 18, word: "disruptive", phonetic: "/dɪsˈrʌptɪv/", translation: "顛覆性的；突破性的", type: "word" },
+      { id: 19, word: "negotiate", phonetic: "/nɪˈɡəʊʃieɪt/", translation: "談判；協商", type: "word" },
+      { id: 20, word: "optimize", phonetic: "/ˈɒptɪmaɪz/", translation: "優化；最佳化", type: "word" },
+
+      // 學術與思考 (Academic & Analytical)
+      { id: 21, word: "hypothesis", phonetic: "/haɪˈpɒθəsɪs/", translation: "假說；前提", type: "word" },
+      { id: 22, word: "paradigm", phonetic: "/ˈpærədaɪm/", translation: "範例；典範", type: "word" },
+      { id: 23, word: "phenomenon", phonetic: "/fəˈnɒmɪnən/", translation: "現象；奇蹟", type: "word" },
+      { id: 24, word: "empirical", phonetic: "/ɪmˈpɪrɪkl/", translation: "憑經驗的；實證的", type: "word" },
+      { id: 25, word: "correlation", phonetic: "/ˌkɒrəˈleɪʃn/", translation: "相互關係；關聯", type: "word" },
+      { id: 26, word: "cognitive", phonetic: "/ˈkɒɡnətɪv/", translation: "認知的", type: "word" },
+      { id: 27, word: "ubiquitous", phonetic: "/juːˈbɪkwɪtəs/", translation: "無所不在的", type: "word" },
+      { id: 28, word: "dichotomy", phonetic: "/daɪˈkɒtəmi/", translation: "二分法；對立", type: "word" },
+      { id: 29, word: "scrutinize", phonetic: "/ˈskruːtənaɪz/", translation: "詳細審視；研判", type: "word" },
+      { id: 30, word: "substantive", phonetic: "/səbˈstæntɪv/", translation: "實質的；真實的", type: "word" },
+
+      // 高階進階形容詞 (Advanced Vocabulary)
+      { id: 31, word: "ephemeral", phonetic: "/ɪˈfemərəl/", translation: "短暫的；朝生暮死的", type: "word" },
+      { id: 32, word: "metamorphosis", phonetic: "/ˌmetəˈmɔːfəsɪs/", translation: "蛻變；變形", type: "word" },
+      { id: 33, word: "serendipity", phonetic: "/ˌserənˈdɪpəti/", translation: "意外的好運；巧緣", type: "word" },
+      { id: 34, word: "eloquent", phonetic: "/ˈeləkwənt/", translation: "雄辯的；有說服力的", type: "word" },
+      { id: 35, word: "inevitable", phonetic: "/ɪnˈevɪtəbl/", translation: "不可避免的；必然的", type: "word" },
+      { id: 36, word: "gregarious", phonetic: "/ɡrɪˈɡeəriəs/", translation: "合群的；愛交際的", type: "word" },
+      { id: 37, word: "tenacious", phonetic: "/təˈneɪʃəs/", translation: "堅韌不拔的；頑強的", type: "word" },
+      { id: 38, word: "quintessential", phonetic: "/ˌkwɪntɪˈsenʃl/", translation: "最典型的；精髓的", type: "word" },
+      { id: 39, word: "benevolent", phonetic: "/bəˈnevələnt/", translation: "仁慈的；慈善的", type: "word" },
+      { id: 40, word: "candor", phonetic: "/ˈkændər/", translation: "坦率；直率", type: "word" },
+      { id: 41, word: "complacent", phonetic: "/kəmˈpleɪsnt/", translation: "自滿的；得意的", type: "word" },
+      { id: 42, word: "diligent", phonetic: "/ˈdɪlɪdʒənt/", translation: "勤勉的；用功的", type: "word" },
+      { id: 43, word: "exaggerate", phonetic: "/ɪɡˈzædʒəreɪt/", translation: "誇大；誇張", type: "word" },
+      { id: 44, word: "fluctuate", phonetic: "/ˈflʌktʃueɪt/", translation: "波動；起伏", type: "word" },
+      { id: 45, word: "imperative", phonetic: "/ɪmˈperətɪv/", translation: "迫切的；必要的", type: "word" },
+      { id: 46, word: "lucid", phonetic: "/ˈluːsɪd/", translation: "清晰易懂的", type: "word" },
+      { id: 47, word: "notorious", phonetic: "/nəʊˈtɔːriəs/", translation: "聲名狼藉的；惡名昭彰的", type: "word" },
+      { id: 48, word: "obsolete", phonetic: "/ˈɒbsəliːt/", translation: "淘汰的；過時的", type: "word" },
+      { id: 49, word: "perseverance", phonetic: "/ˌpɜːsəˈvɪərəns/", translation: "不屈不撓；毅力", type: "word" },
+      { id: 50, word: "profound", phonetic: "/prəˈfaʊnd/", translation: "深刻的；深奧的", type: "word" },
+      { id: 51, word: "reconcile", phonetic: "/ˈrekənsaɪl/", translation: "調和；和解", type: "word" },
+      { id: 52, word: "solitude", phonetic: "/ˈsɒlətjuːd/", translation: "獨處；孤獨", type: "word" },
+      { id: 53, word: "tranquil", phonetic: "/ˈtræŋkwɪl/", translation: "寧靜的；平靜的", type: "word" },
+      { id: 54, word: "unprecedented", phonetic: "/ʌnˈpresɪdentɪd/", translation: "史無前例的", type: "word" },
+      { id: 55, word: "vulnerable", phonetic: "/ˈvʌlnərəbl/", translation: "脆弱的；易受傷害的", type: "word" },
+      { id: 56, word: "witty", phonetic: "/ˈwɪti/", translation: "機智風趣的", type: "word" },
+      { id: 57, word: "zealous", phonetic: "/ˈzeləs/", translation: "熱情的；狂熱的", type: "word" },
+      { id: 58, word: "culmination", phonetic: "/ˌkʌlmɪˈneɪʃn/", translation: "頂點；高潮", type: "word" },
+      { id: 59, word: "deteriorate", phonetic: "/dɪˈtɪəriəreɪt/", translation: "惡化；退化", type: "word" },
+      { id: 60, word: "exquisite", phonetic: "/ɪkˈskwɪzɪt/", translation: "精緻的；精美的", type: "word" },
+      { id: 61, word: "fostering", phonetic: "/ˈfɒstərɪŋ/", translation: "培養；促進", type: "word" },
+      { id: 62, word: "impeccable", phonetic: "/ɪmˈpekəbl/", translation: "無懈可擊的；完美的", type: "word" },
+      { id: 63, word: "juxtapose", phonetic: "/ˌdʒʌkstəˈpəʊz/", translation: "並置；並列對比", type: "word" },
+      { id: 64, word: "kinship", phonetic: "/ˈkɪnʃɪp/", translation: "親族關係；親切感", type: "word" },
+      { id: 65, word: "lucrative", phonetic: "/ˈluːkrətɪv/", translation: "利潤豐厚的", type: "word" },
+      { id: 66, word: "nuance", phonetic: "/ˈnjuːɑːns/", translation: "細微差別", type: "word" },
+      { id: 67, word: "ostentatious", phonetic: "/ˌɒstenˈteɪʃəs/", translation: "炫耀的；賣弄的", type: "word" },
+      { id: 68, word: "plausible", phonetic: "/ˈplɔːzəbl/", translation: "貌似合理的", type: "word" },
+      { id: 69, word: "resilience", phonetic: "/rɪˈzɪliəns/", translation: "復原力；韌性", type: "word" },
+      { id: 70, word: "tangible", phonetic: "/ˈtændʒəbl/", translation: "有形的；切實的", type: "word" },
+
+      // 動詞片語 (Phrasal Verbs)
+      { id: 71, word: "brush up on", phonetic: "/brʌʃ ʌp ɒn/", translation: "溫習；重溫", type: "phrase" },
+      { id: 72, word: "come up with", phonetic: "/kʌm ʌp wɪð/", translation: "想出；提出", type: "phrase" },
+      { id: 73, word: "cut down on", phonetic: "/kʌt daʊn ɒn/", translation: "減少；削減", type: "phrase" },
+      { id: 74, word: "figure out", phonetic: "/ˈfɪɡər aʊt/", translation: "想出；理解", type: "phrase" },
+      { id: 75, word: "get along with", phonetic: "/ɡet əˈlɒŋ wɪð/", translation: "與…相處融洽", type: "phrase" },
+      { id: 76, word: "look forward to", phonetic: "/lʊk ˈfɔːwəd tuː/", translation: "期待；盼望", type: "phrase" },
+      { id: 77, word: "pay off", phonetic: "/peɪ ɒf/", translation: "得到回報；成功", type: "phrase" },
+      { id: 78, word: "run out of", phonetic: "/rʌn aʊt əv/", translation: "用完；耗盡", type: "phrase" },
+      { id: 79, word: "take advantage of", phonetic: "/teɪk ədˈvɑːntɪdʒ əv/", translation: "利用；善用", type: "phrase" },
+      { id: 80, word: "turn out to be", phonetic: "/tɜːn aʊt tuː biː/", translation: "結果發現是", type: "phrase" },
+      { id: 81, word: "bring about", phonetic: "/brɪŋ əˈbaʊt/", translation: "引起；導致", type: "phrase" },
+      { id: 82, word: "carry out", phonetic: "/ˈkæri aʊt/", translation: "貫徹；執行", type: "phrase" },
+      { id: 83, word: "fall back on", phonetic: "/fɔːl bæk ɒn/", translation: "求助於；退路", type: "phrase" },
+      { id: 84, word: "keep up with", phonetic: "/kiːp ʌp wɪð/", translation: "跟上…的腳步", type: "phrase" },
+      { id: 85, word: "phasing out", phonetic: "/feɪzɪŋ aʊt/", translation: "逐步淘汰", type: "phrase" },
+
+      // 成語與慣用語 (Idioms & Common Expressions)
+      { id: 86, word: "bite the bullet", phonetic: "/baɪt ðə ˈbʊlɪt/", translation: "咬緊牙關；硬著頭皮做", type: "phrase" },
+      { id: 87, word: "break the ice", phonetic: "/breɪk ðə aɪs/", translation: "破冰；打破沈默", type: "phrase" },
+      { id: 88, word: "hit the nail on the head", phonetic: "/hɪt ðə neɪl ɒn ðə hed/", translation: "一針見血；切中要害", type: "phrase" },
+      { id: 89, word: "think outside the box", phonetic: "/θɪŋk ˌaʊtˈsaɪd ðə bɒks/", translation: "跳脫框架思考", type: "phrase" },
+      { id: 90, word: "burn the midnight oil", phonetic: "/bɜːn ðə ˈmɪdnaɪt ɔɪl/", translation: "熬夜苦讀；加班", type: "phrase" },
+      { id: 91, word: "blessing in disguise", phonetic: "/ˈblesɪŋ ɪn dɪsˈɡaɪz/", translation: "塞翁失馬；塞翁之福", type: "phrase" },
+      { id: 92, word: "touch base with", phonetic: "/tʌtʃ beɪs wɪð/", translation: "與…聯繫；保持交流", type: "phrase" },
+      { id: 93, word: "on the same page", phonetic: "/ɒn ðə seɪm peɪdʒ/", translation: "達成共識；想法一致", type: "phrase" },
+      { id: 94, word: "cost an arm and a leg", phonetic: "/kɒst æn ɑːm ænd ə leɡ/", translation: "價值不菲；非常昂貴", type: "phrase" },
+      { id: 95, word: "take it with a grain of salt", phonetic: "/teɪk ɪt wɪð ə ɡreɪn əv sɔːlt/", translation: "持保留態度；半信半疑", type: "phrase" },
+      { id: 96, word: "spill the beans", phonetic: "/spɪl ðə biːnz/", translation: "洩漏秘密", type: "phrase" },
+      { id: 97, word: "under the weather", phonetic: "/ˈʌndər ðə ˈweðər/", translation: "身體不適；微恙", type: "phrase" },
+      { id: 98, word: "play it by ear", phonetic: "/pleɪ ɪt baɪ ɪər/", translation: "隨機應變；見機行事", type: "phrase" },
+      { id: 99, word: "crying over spilt milk", phonetic: "/ˈkraɪɪŋ ˈəʊvər spɪlt mɪlk/", translation: "為無法挽回的既成事實沮喪", type: "phrase" },
+      { id: 100, word: "action speaks louder than words", phonetic: "/ˈækʃn spiːks ˈlaʊdər ðæn wɜːdz/", translation: "坐而言不如起而行", type: "phrase" }
     ];
 
     // -------------------------------------------------------------
-    // 2. 全域狀態管理 (State)
+    // 2. 全域狀態管理與隨機洗牌佇列 (Fisher-Yates Shuffle)
     // -------------------------------------------------------------
+    let speechQueue = [];
+    let listeningQueue = [];
     let speechIndex = 0;
     let listeningIndex = 0;
     let isRecording = false;
     let recognition = null;
     let currentFilteredList = [...vocabList];
     let listeningAnswered = false;
+
+    // Fisher-Yates 隨機洗牌演算法
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 初始化不重複隨機佇列
+    function initRandomQueues() {
+      speechQueue = shuffleArray(vocabList.map((_, idx) => idx));
+      listeningQueue = shuffleArray(vocabList.map((_, idx) => idx));
+      speechIndex = 0;
+      listeningIndex = 0;
+    }
 
     // 升級版雙向練習統計數據 (從 localStorage 載入)
     let userStats = JSON.parse(localStorage.getItem('speechMasterStatsV2')) || {
@@ -430,7 +459,7 @@
       listeningTotal: 0,
       listeningCorrect: 0,
       listeningWrong: 0,
-      wordStats: {} // wordId -> { speechPassed: bool, listeningPassed: bool }
+      wordStats: {}
     };
 
     // -------------------------------------------------------------
@@ -472,6 +501,7 @@
     // 4. Web Speech API 初始化 (STT & TTS)
     // -------------------------------------------------------------
     window.onload = function() {
+      initRandomQueues();
       initSpeechRecognition();
       updateStatsUI();
       renderSpeechCard();
@@ -527,10 +557,11 @@
     }
 
     // -------------------------------------------------------------
-    // 5. 【跟讀口說模式】邏輯
+    // 5. 【跟讀口說模式】邏輯 (採用隨機隊列)
     // -------------------------------------------------------------
     function playSpeechAudio() {
-      playTTS(vocabList[speechIndex].word);
+      const targetIndex = speechQueue[speechIndex];
+      playTTS(vocabList[targetIndex].word);
     }
 
     function toggleSpeechRecognition() {
@@ -574,7 +605,8 @@
     }
 
     function handleSpeechResult(event) {
-      const targetItem = vocabList[speechIndex];
+      const targetIndex = speechQueue[speechIndex];
+      const targetItem = vocabList[targetIndex];
       const targetWord = targetItem.word;
       
       const results = event.results[0];
@@ -625,9 +657,10 @@
     }
 
     function renderSpeechCard() {
-      const item = vocabList[speechIndex];
-      document.getElementById('speechCategory').innerText = item.type === 'word' ? 'Single Word (單字)' : 'Phrase (片語)';
-      document.getElementById('speechProgress').innerText = `${speechIndex + 1} / ${vocabList.length}`;
+      const targetIndex = speechQueue[speechIndex];
+      const item = vocabList[targetIndex];
+      document.getElementById('speechCategory').innerText = item.type === 'word' ? 'Single Word (單字)' : 'Phrase / Idiom (片語/成語)';
+      document.getElementById('speechProgress').innerText = `隨機卡片 ${speechIndex + 1} / ${vocabList.length}`;
       document.getElementById('speechWord').innerText = item.word;
       document.getElementById('speechPhonetic').innerText = item.phonetic;
       document.getElementById('speechTranslation').innerText = item.translation;
@@ -637,27 +670,35 @@
     }
 
     function nextSpeechCard() {
-      speechIndex = (speechIndex + 1) % vocabList.length;
+      speechIndex++;
+      if (speechIndex >= speechQueue.length) {
+        speechQueue = shuffleArray(vocabList.map((_, idx) => idx));
+        speechIndex = 0;
+        showToast('完成一輪隨機測驗，已重新打亂題目！', 'info');
+      }
       renderSpeechCard();
     }
 
     function prevSpeechCard() {
-      speechIndex = (speechIndex - 1 + vocabList.length) % vocabList.length;
+      speechIndex = (speechIndex - 1 + speechQueue.length) % speechQueue.length;
       renderSpeechCard();
     }
 
     function randomSpeechCard() {
-      speechIndex = Math.floor(Math.random() * vocabList.length);
+      speechQueue = shuffleArray(vocabList.map((_, idx) => idx));
+      speechIndex = 0;
       renderSpeechCard();
+      showToast('已重新隨機打亂題目順序！', 'info');
     }
 
     // -------------------------------------------------------------
-    // 6. 【聽力測驗模式】核心邏輯 (NEW)
+    // 6. 【聽力測驗模式】核心邏輯 (隨機隊列)
     // -------------------------------------------------------------
     function renderListeningQuiz() {
       listeningAnswered = false;
-      const targetItem = vocabList[listeningIndex];
-      document.getElementById('listeningProgress').innerText = `單字 #${targetItem.id} / ${vocabList.length}`;
+      const targetIndex = listeningQueue[listeningIndex];
+      const targetItem = vocabList[targetIndex];
+      document.getElementById('listeningProgress').innerText = `隨機第 ${listeningIndex + 1} 題 / ${vocabList.length}`;
 
       // 重置【下一題】按鈕狀態
       const nextBtn = document.getElementById('nextListeningBtn');
@@ -685,7 +726,8 @@
     }
 
     function playListeningAudio() {
-      playTTS(vocabList[listeningIndex].word);
+      const targetIndex = listeningQueue[listeningIndex];
+      playTTS(vocabList[targetIndex].word);
     }
 
     function generateListeningOptions(correctItem) {
@@ -741,13 +783,20 @@
     }
 
     function nextListeningQuestion() {
-      listeningIndex = (listeningIndex + 1) % vocabList.length;
+      listeningIndex++;
+      if (listeningIndex >= listeningQueue.length) {
+        listeningQueue = shuffleArray(vocabList.map((_, idx) => idx));
+        listeningIndex = 0;
+        showToast('完成一輪聽力測驗，已重新打亂題目！', 'info');
+      }
       renderListeningQuiz();
     }
 
     function randomListeningQuestion() {
-      listeningIndex = Math.floor(Math.random() * vocabList.length);
+      listeningQueue = shuffleArray(vocabList.map((_, idx) => idx));
+      listeningIndex = 0;
       renderListeningQuiz();
+      showToast('已重新隨機打亂題目順序！', 'info');
     }
 
     // -------------------------------------------------------------
