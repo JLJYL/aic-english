@@ -253,13 +253,10 @@
       <div class="mb-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
         <div class="relative w-full sm:w-80">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-          <input type="text" id="searchInput" oninput="filterList()" placeholder="搜尋單字、片語或中文..." class="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors">
+          <input type="text" id="searchInput" oninput="filterList()" placeholder="搜尋單字或中文..." class="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors">
         </div>
 
         <div class="flex items-center gap-2 w-full sm:w-auto justify-end overflow-x-auto pb-1 sm:pb-0">
-          <button onclick="filterType('all')" id="filterAll" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white shrink-0">全部 (100)</button>
-          <button onclick="filterType('word')" id="filterWord" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-400 hover:text-slate-200 shrink-0">單字</button>
-          <button onclick="filterType('phrase')" id="filterPhrase" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-400 hover:text-slate-200 shrink-0">片語</button>
           <button onclick="resetStats()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 ml-2 shrink-0">
             <i class="fa-solid fa-trash-can"></i> 重置紀錄
           </button>
@@ -273,7 +270,7 @@
             <thead>
               <tr class="border-b border-slate-800 bg-slate-950/50 text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 <th class="p-4 w-12 text-center">#</th>
-                <th class="p-4">英文單字 / 片語</th>
+                <th class="p-4">英文單字</th>
                 <th class="p-4">音標</th>
                 <th class="p-4">中文釋義</th>
                 <th class="p-4 text-center">口說狀態</th>
@@ -305,10 +302,10 @@
   <!-- JAVASCRIPT LOGIC -->
   <script>
     // -------------------------------------------------------------
-    // 1. 多元豐富 100 實用英文單字、片語與高階成語資料庫 (JSON Array)
+    // 1. 多元豐富 100 實用英文單字資料庫 (全單字無片語)
     // -------------------------------------------------------------
     const vocabList = [
-      // 基礎與日常 (Everyday)
+      // 基礎與日常 (Everyday & Personality)
       { id: 1, word: "resilient", phonetic: "/rɪˈzɪliənt/", translation: "有彈性的；能迅速恢復的", type: "word" },
       { id: 2, word: "empathy", phonetic: "/ˈempəθi/", translation: "同理心；共鳴", type: "word" },
       { id: 3, word: "spontaneous", phonetic: "/spɒnˈteɪniəs/", translation: "自發的；率真的", type: "word" },
@@ -320,7 +317,7 @@
       { id: 9, word: "ambiguous", phonetic: "/æmˈbɪɡjuəs/", translation: "模稜兩可的；含糊的", type: "word" },
       { id: 10, word: "aesthetic", phonetic: "/iːsˈθetɪk/", translation: "美感的；審美的", type: "word" },
 
-      // 職場與商務 (Business & Tech)
+      // 職場與商務 (Business & Innovation)
       { id: 11, word: "synergy", phonetic: "/ˈsɪnədʒi/", translation: "協同效應；綜效", type: "word" },
       { id: 12, word: "benchmark", phonetic: "/ˈbentʃmɑːk/", translation: "基準；標竿", type: "word" },
       { id: 13, word: "feasibility", phonetic: "/ˌfiːzəˈbɪləti/", translation: "可行性", type: "word" },
@@ -332,7 +329,7 @@
       { id: 19, word: "negotiate", phonetic: "/nɪˈɡəʊʃieɪt/", translation: "談判；協商", type: "word" },
       { id: 20, word: "optimize", phonetic: "/ˈɒptɪmaɪz/", translation: "優化；最佳化", type: "word" },
 
-      // 學術與思考 (Academic & Analytical)
+      // 學術與邏輯思考 (Academic & Analytical)
       { id: 21, word: "hypothesis", phonetic: "/haɪˈpɒθəsɪs/", translation: "假說；前提", type: "word" },
       { id: 22, word: "paradigm", phonetic: "/ˈpærədaɪm/", translation: "範例；典範", type: "word" },
       { id: 23, word: "phenomenon", phonetic: "/fəˈnɒmɪnən/", translation: "現象；奇蹟", type: "word" },
@@ -344,7 +341,7 @@
       { id: 29, word: "scrutinize", phonetic: "/ˈskruːtənaɪz/", translation: "詳細審視；研判", type: "word" },
       { id: 30, word: "substantive", phonetic: "/səbˈstæntɪv/", translation: "實質的；真實的", type: "word" },
 
-      // 高階進階形容詞 (Advanced Vocabulary)
+      // 高級動態與描述詞 (Advanced Vocabulary)
       { id: 31, word: "ephemeral", phonetic: "/ɪˈfemərəl/", translation: "短暫的；朝生暮死的", type: "word" },
       { id: 32, word: "metamorphosis", phonetic: "/ˌmetəˈmɔːfəsɪs/", translation: "蛻變；變形", type: "word" },
       { id: 33, word: "serendipity", phonetic: "/ˌserənˈdɪpəti/", translation: "意外的好運；巧緣", type: "word" },
@@ -386,39 +383,39 @@
       { id: 69, word: "resilience", phonetic: "/rɪˈzɪliəns/", translation: "復原力；韌性", type: "word" },
       { id: 70, word: "tangible", phonetic: "/ˈtændʒəbl/", translation: "有形的；切實的", type: "word" },
 
-      // 動詞片語 (Phrasal Verbs)
-      { id: 71, word: "brush up on", phonetic: "/brʌʃ ʌp ɒn/", translation: "溫習；重溫", type: "phrase" },
-      { id: 72, word: "come up with", phonetic: "/kʌm ʌp wɪð/", translation: "想出；提出", type: "phrase" },
-      { id: 73, word: "cut down on", phonetic: "/kʌt daʊn ɒn/", translation: "減少；削減", type: "phrase" },
-      { id: 74, word: "figure out", phonetic: "/ˈfɪɡər aʊt/", translation: "想出；理解", type: "phrase" },
-      { id: 75, word: "get along with", phonetic: "/ɡet əˈlɒŋ wɪð/", translation: "與…相處融洽", type: "phrase" },
-      { id: 76, word: "look forward to", phonetic: "/lʊk ˈfɔːwəd tuː/", translation: "期待；盼望", type: "phrase" },
-      { id: 77, word: "pay off", phonetic: "/peɪ ɒf/", translation: "得到回報；成功", type: "phrase" },
-      { id: 78, word: "run out of", phonetic: "/rʌn aʊt əv/", translation: "用完；耗盡", type: "phrase" },
-      { id: 79, word: "take advantage of", phonetic: "/teɪk ədˈvɑːntɪdʒ əv/", translation: "利用；善用", type: "phrase" },
-      { id: 80, word: "turn out to be", phonetic: "/tɜːn aʊt tuː biː/", translation: "結果發現是", type: "phrase" },
-      { id: 81, word: "bring about", phonetic: "/brɪŋ əˈbaʊt/", translation: "引起；導致", type: "phrase" },
-      { id: 82, word: "carry out", phonetic: "/ˈkæri aʊt/", translation: "貫徹；執行", type: "phrase" },
-      { id: 83, word: "fall back on", phonetic: "/fɔːl bæk ɒn/", translation: "求助於；退路", type: "phrase" },
-      { id: 84, word: "keep up with", phonetic: "/kiːp ʌp wɪð/", translation: "跟上…的腳步", type: "phrase" },
-      { id: 85, word: "phasing out", phonetic: "/feɪzɪŋ aʊt/", translation: "逐步淘汰", type: "phrase" },
+      // 替換原片語：高階動詞與名詞庫 (Advanced Verbs & Nouns)
+      { id: 71, word: "ambivalence", phonetic: "/æmˈbɪvələns/", translation: "矛盾心理；猶豫不決", type: "word" },
+      { id: 72, word: "collaborate", phonetic: "/kəˈlæbəreɪt/", translation: "合作；共同創作", type: "word" },
+      { id: 73, word: "consolidate", phonetic: "/kənˈsɒlɪdeɪt/", translation: "鞏固；合併", type: "word" },
+      { id: 74, word: "differentiate", phonetic: "/ˌdɪfəˈrenʃieɪt/", translation: "區分；區別", type: "word" },
+      { id: 75, word: "emulate", phonetic: "/ˈemjuleɪt/", translation: "效法；模仿", type: "word" },
+      { id: 76, word: "facilitate", phonetic: "/fəˈsɪlɪteɪt/", translation: "促進；使便利", type: "word" },
+      { id: 77, word: "integrate", phonetic: "/ˈɪntɪɡreɪt/", translation: "整合；融入", type: "word" },
+      { id: 78, word: "mitigate", phonetic: "/ˈmɪtɪɡeɪt/", translation: "緩和；減輕", type: "word" },
+      { id: 79, word: "procrastinate", phonetic: "/prəʊˈkræstɪneɪt/", translation: "拖延；延宕", type: "word" },
+      { id: 80, word: "substantiate", phonetic: "/səbˈstænʃieɪt/", translation: "證實；證明", type: "word" },
+      { id: 81, word: "advocate", phonetic: "/ˈædvəkeɪt/", translation: "提倡；主張", type: "word" },
+      { id: 82, word: "coalesce", phonetic: "/ˌkəʊəˈles/", translation: "聯合；凝聚", type: "word" },
+      { id: 83, word: "disseminate", phonetic: "/dɪˈsemɪneɪt/", translation: "散播；宣傳", type: "word" },
+      { id: 84, word: "exemplify", phonetic: "/ɪɡˈzemplɪfaɪ/", translation: "作為…的範例；例證", type: "word" },
+      { id: 85, word: "fluctuation", phonetic: "/ˌflʌktʃuˈeɪʃn/", translation: "起伏；變動", type: "word" },
 
-      // 成語與慣用語 (Idioms & Common Expressions)
-      { id: 86, word: "bite the bullet", phonetic: "/baɪt ðə ˈbʊlɪt/", translation: "咬緊牙關；硬著頭皮做", type: "phrase" },
-      { id: 87, word: "break the ice", phonetic: "/breɪk ðə aɪs/", translation: "破冰；打破沈默", type: "phrase" },
-      { id: 88, word: "hit the nail on the head", phonetic: "/hɪt ðə neɪl ɒn ðə hed/", translation: "一針見血；切中要害", type: "phrase" },
-      { id: 89, word: "think outside the box", phonetic: "/θɪŋk ˌaʊtˈsaɪd ðə bɒks/", translation: "跳脫框架思考", type: "phrase" },
-      { id: 90, word: "burn the midnight oil", phonetic: "/bɜːn ðə ˈmɪdnaɪt ɔɪl/", translation: "熬夜苦讀；加班", type: "phrase" },
-      { id: 91, word: "blessing in disguise", phonetic: "/ˈblesɪŋ ɪn dɪsˈɡaɪz/", translation: "塞翁失馬；塞翁之福", type: "phrase" },
-      { id: 92, word: "touch base with", phonetic: "/tʌtʃ beɪs wɪð/", translation: "與…聯繫；保持交流", type: "phrase" },
-      { id: 93, word: "on the same page", phonetic: "/ɒn ðə seɪm peɪdʒ/", translation: "達成共識；想法一致", type: "phrase" },
-      { id: 94, word: "cost an arm and a leg", phonetic: "/kɒst æn ɑːm ænd ə leɡ/", translation: "價值不菲；非常昂貴", type: "phrase" },
-      { id: 95, word: "take it with a grain of salt", phonetic: "/teɪk ɪt wɪð ə ɡreɪn əv sɔːlt/", translation: "持保留態度；半信半疑", type: "phrase" },
-      { id: 96, word: "spill the beans", phonetic: "/spɪl ðə biːnz/", translation: "洩漏秘密", type: "phrase" },
-      { id: 97, word: "under the weather", phonetic: "/ˈʌndər ðə ˈweðər/", translation: "身體不適；微恙", type: "phrase" },
-      { id: 98, word: "play it by ear", phonetic: "/pleɪ ɪt baɪ ɪər/", translation: "隨機應變；見機行事", type: "phrase" },
-      { id: 99, word: "crying over spilt milk", phonetic: "/ˈkraɪɪŋ ˈəʊvər spɪlt mɪlk/", translation: "為無法挽回的既成事實沮喪", type: "phrase" },
-      { id: 100, word: "action speaks louder than words", phonetic: "/ˈækʃn spiːks ˈlaʊdər ðæn wɜːdz/", translation: "坐而言不如起而行", type: "phrase" }
+      // 替換原成語：精選高階核心詞彙 (Core Expressive Vocabulary)
+      { id: 86, word: "adversity", phonetic: "/ədˈvɜːsəti/", translation: "逆境；不幸", type: "word" },
+      { id: 87, word: "brevity", phonetic: "/ˈbrevəti/", translation: "簡潔；簡短", type: "word" },
+      { id: 88, word: "catalyst", phonetic: "/ˈkætəlɪst/", translation: "催化劑；觸媒", type: "word" },
+      { id: 89, word: "discrepancy", phonetic: "/dɪsˈkrepənsi/", translation: "不符；差異", type: "word" },
+      { id: 90, word: "equity", phonetic: "/ˈekwəti/", translation: "公平；股權", type: "word" },
+      { id: 91, word: "fortitude", phonetic: "/ˈfɔːtɪtjuːd/", translation: "堅韌；剛毅", type: "word" },
+      { id: 92, word: "hierarchy", phonetic: "/ˈhaɪərɑːki/", translation: "階級制度；層級", type: "word" },
+      { id: 93, word: "integrity", phonetic: "/ɪnˈteɡrəti/", translation: "正直；誠實", type: "word" },
+      { id: 94, word: "jeopardy", phonetic: "/ˈdʒepədi/", translation: "危險；風險", type: "word" },
+      { id: 95, word: "magnitude", phonetic: "/ˈmæɡnɪtjuːd/", translation: "巨大；規模", type: "word" },
+      { id: 96, word: "paradox", phonetic: "/ˈpærədɒks/", translation: "悖論；自相矛盾", type: "word" },
+      { id: 97, word: "redundant", phonetic: "/rɪˈdʌndənt/", translation: "多餘的；累贅的", type: "word" },
+      { id: 98, word: "syndrome", phonetic: "/ˈsɪndrəʊm/", translation: "症候群；症狀", type: "word" },
+      { id: 99, word: "unanimity", phonetic: "/ˌjuːnəˈnɪməti/", translation: "全體一致；無異議", type: "word" },
+      { id: 100, word: "vindicate", phonetic: "/ˈvɪndɪkeɪt/", translation: "澄清；證明清白", type: "word" }
     ];
 
     // -------------------------------------------------------------
@@ -659,7 +656,7 @@
     function renderSpeechCard() {
       const targetIndex = speechQueue[speechIndex];
       const item = vocabList[targetIndex];
-      document.getElementById('speechCategory').innerText = item.type === 'word' ? 'Single Word (單字)' : 'Phrase / Idiom (片語/成語)';
+      document.getElementById('speechCategory').innerText = 'English Word (英文單字)';
       document.getElementById('speechProgress').innerText = `隨機卡片 ${speechIndex + 1} / ${vocabList.length}`;
       document.getElementById('speechWord').innerText = item.word;
       document.getElementById('speechPhonetic').innerText = item.phonetic;
